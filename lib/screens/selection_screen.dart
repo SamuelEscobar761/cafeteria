@@ -6,9 +6,7 @@ import 'constants.dart';
 class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final apiConnector = ApiConnector();
-    apiConnector.realizarConexion();
-
+    ApiConnector.instance.realizarConexion();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
