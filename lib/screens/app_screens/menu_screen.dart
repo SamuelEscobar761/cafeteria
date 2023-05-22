@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/Almuerzo.dart';
+import '../../models/Cliente.dart';
 import '../constants.dart';
 import 'acompanhamientos_screen.dart';
 
@@ -27,6 +28,8 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Recibiendo el argumento del objeto cliente
+    final cliente = ModalRoute.of(context)?.settings.arguments as Cliente?;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Column(
