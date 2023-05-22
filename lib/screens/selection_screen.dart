@@ -1,3 +1,4 @@
+import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -5,6 +6,9 @@ import 'constants.dart';
 class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final apiConnector = ApiConnector();
+    apiConnector.realizarConexion();
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
