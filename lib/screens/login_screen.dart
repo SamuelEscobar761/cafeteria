@@ -5,7 +5,8 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController codigoController = TextEditingController();
   final TextEditingController correoController = TextEditingController();
   final TextEditingController passwdController = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  LoginScreen({super.key});
 
   void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -19,34 +20,31 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Iniciar Sesión'),
-      ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: codigoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Código',
               ),
             ),
             TextField(
               controller: correoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Correo Electrónico',
               ),
             ),
             TextField(
               controller: passwdController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Contraseña',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 final codigo = codigoController.text;
@@ -67,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                   }
                 });
               },
-              child: Text('Iniciar Sesión'),
+              child: const Text('Iniciar Sesión'),
             ),
           ],
         ),

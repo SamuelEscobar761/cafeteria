@@ -65,8 +65,34 @@ class ApiConnector {
     }catch (e) {
       // Ocurrió un error durante la conexión, maneja la excepción aquí
       print('Error de conexión: $e');
-    };
+    }
     return null;
+  }
+
+  Future<void> registrarCliente(nombre, codigo, correo, telefono, passwd)async {
+    final url = Uri.parse('$baseUrl/registrarCliente.php');
+    final body = {
+      'nombre': nombre,
+      'codigo': codigo,
+      'correo': correo,
+      'telefono': telefono,
+      'passwd': passwd,
+    };
+    try{
+      final response = await http.post(url, body: body).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        // La solicitud fue exitosa, puedes manejar la respuesta aquí
+        print(response.body);
+
+      } else {
+        // La solicitud no fue exitosa, maneja el error aquí
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+
+    }catch (e) {
+      // Ocurrió un error durante la conexión, maneja la excepción aquí
+      print('Error de conexión: $e');
+    }
   }
 }
 
