@@ -1,4 +1,4 @@
-class Almuerzo {
+class Plato {
   final String nombre;
   final String descripcion;
   final double precio;
@@ -6,7 +6,7 @@ class Almuerzo {
   final int acompanhamientos;
   final int ensaladas;
 
-  Almuerzo({
+  Plato({
     required this.nombre,
     required this.descripcion,
     required this.precio,

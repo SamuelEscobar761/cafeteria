@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../models/Cliente.dart';
+import '../models/Plato.dart';
 
 class ApiConnector {
-  static const String baseUrl = 'http://192.168.1.223/api-cafeteria'; // Reemplaza con la URL de tu servidor
+  static const String baseUrl = 'http://192.168.1.229/api-cafeteria'; // Reemplaza con la URL de tu servidor
 
   // Instancia única del singleton
   static final ApiConnector _instance = ApiConnector._internal();
@@ -93,6 +94,51 @@ class ApiConnector {
       // Ocurrió un error durante la conexión, maneja la excepción aquí
       print('Error de conexión: $e');
     }
+  }
+
+  Future<List<Plato>> getPlatos()async {
+    //TODO
+    final List<Plato> almuerzos = [
+      Plato(
+        nombre: "Almuerzo 1",
+        descripcion: "Descripción del almuerzo 1",
+        precio: 10.99,
+        imagen: "assets/images/upb_logo.jpg",
+        acompanhamientos: 2,
+        ensaladas: 1,
+      ),
+      Plato(
+        nombre: "Almuerzo 2",
+        descripcion: "Descripción del almuerzo 2",
+        precio: 9.99,
+        imagen: "assets/images/upb_logo.jpg",
+        acompanhamientos: 1,
+        ensaladas: 2,
+      ),
+      // Agrega más objetos Almuerzo según tus necesidades
+    ];
+    return almuerzos;
+  }
+  Future<List<String>> getGuarniciones()async {
+    List<String> guarnicionesDisponibles = [
+      'Acompanhamiento 1',
+      'Acompanhamiento 2',
+      'Acompanhamiento 3',
+      'Acompanhamiento 4',
+    ];
+    return guarnicionesDisponibles;
+  }
+  Future<List<String>> getEnsaladas()async {
+    List<String> ensaladasDisponibles = [
+      'Ensalada 1',
+      'Ensalada 2',
+      'Ensalada 3',
+      'Ensalada 4',
+    ];
+    return ensaladasDisponibles;
+  }
+  Future<void> insertReserva()async {
+    //TODO
   }
 }
 
