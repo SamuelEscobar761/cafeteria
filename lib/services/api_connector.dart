@@ -106,6 +106,7 @@ class ApiConnector {
         imagen: "assets/images/upb_logo.jpg",
         acompanhamientos: 2,
         ensaladas: 1,
+        salsas: 2,
       ),
       Plato(
         nombre: "Almuerzo 2",
@@ -114,6 +115,7 @@ class ApiConnector {
         imagen: "assets/images/upb_logo.jpg",
         acompanhamientos: 1,
         ensaladas: 2,
+        salsas: 2,
       ),
       // Agrega más objetos Almuerzo según tus necesidades
     ];
@@ -136,6 +138,14 @@ class ApiConnector {
       'Ensalada 4',
     ];
     return ensaladasDisponibles;
+  }
+  Future<List<String>> getSalsas()async{
+    List<String> salsasDisponibles =[
+      'Ketchup',
+      'Mostaza',
+      'Mayonesa',
+    ];
+    return salsasDisponibles;
   }
   Future<void> insertReserva()async {
     //TODO

@@ -5,6 +5,7 @@ class Plato {
   final String imagen;
   final int acompanhamientos;
   final int ensaladas;
+  final int salsas;
 
   Plato({
     required this.nombre,
@@ -13,5 +14,6 @@ class Plato {
     required this.imagen,
     required this.acompanhamientos,
     required this.ensaladas,
+    required this.salsas,
   });
 }
