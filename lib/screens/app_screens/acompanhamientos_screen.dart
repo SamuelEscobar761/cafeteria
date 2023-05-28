@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../models/Almuerzo.dart';
 
 class AcompanhamientosScreen extends StatefulWidget {
@@ -8,6 +7,7 @@ class AcompanhamientosScreen extends StatefulWidget {
     Key? key,
     required this.almuerzo,
   }) : super(key: key);
+
   @override
   _AcompanhamientosScreenState createState() => _AcompanhamientosScreenState();
 }
@@ -27,15 +27,19 @@ class _AcompanhamientosScreenState extends State<AcompanhamientosScreen> {
   ];
   String? acompanhamientoSeleccionado;
   String? ensaladaSeleccionada;
+
   @override
   Widget build(BuildContext context) {
     Almuerzo almuerzo = widget.almuerzo;
     List<String> acompanhamientosSeleccionado = List<String>.filled(almuerzo.acompanhamientos, '');
     List<String> ensaladasSeleccionada = List<String>.filled(almuerzo.ensaladas, 'e');
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 107, 142, 35),
         title: Text(almuerzo.nombre),
       ),
+      backgroundColor: Colors.lightGreen.shade200,
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -94,7 +98,6 @@ class _AcompanhamientosScreenState extends State<AcompanhamientosScreen> {
                       );
                     }).toList(),
                   ),
-
                   SizedBox(height: 16.0),
                 ],
               ),
@@ -110,5 +113,4 @@ class _AcompanhamientosScreenState extends State<AcompanhamientosScreen> {
       ),
     );
   }
-
 }

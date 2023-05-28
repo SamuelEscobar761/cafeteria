@@ -1,45 +1,101 @@
 import 'package:flutter/material.dart';
-
 import 'constants.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Código',
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 107, 142, 35),
+        centerTitle: true,
+        title: Text(
+          'Bienvenido a Lalas Coffee',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        elevation: 0,
+      ),
+      backgroundColor: Colors.lightGreen.shade200,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 150.0,
+                height: 150.0,
               ),
-            ),
-            SizedBox(height: 16.0),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Correo Electrónico',
+              SizedBox(height: 16.0),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: InputDecoration(
+                  labelText: 'Código',
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  focusColor: Colors.green, // Color de resaltado del borde al enfocar
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
+              SizedBox(height: 16.0),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: InputDecoration(
+                  labelText: 'Correo Electrónico',
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  focusColor: Colors.green, // Color de resaltado del borde al enfocar
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Acción a realizar al presionar el botón de login
-                Navigator.pushNamed(context, '/menu');
-              },
-              child: Text('Iniciar sesión'),
-            ),
-          ],
+              SizedBox(height: 16.0),
+              TextFormField(
+                obscureText: true,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                decoration: InputDecoration(
+                  labelText: 'Contraseña',
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  focusColor: Colors.green, // Color de resaltado del borde al enfocar
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Acción a realizar al presionar el botón de inicio de sesión
+                  Navigator.pushNamed(context, '/menu');
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 107, 142, 35),
+                  onPrimary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                child: Text(
+                  'Iniciar sesión',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
