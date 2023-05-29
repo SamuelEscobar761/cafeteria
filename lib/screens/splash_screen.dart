@@ -1,8 +1,8 @@
+import 'package:cafeteria/screens/selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:cafeteria/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -34,12 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ),
       backgroundColor:  Colors.lightGreen.shade200,
-      nextScreen: LoginScreen(),
       splashIconSize: 400,
       duration: 2500,
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.leftToRightWithFade,
-      animationDuration: const Duration(seconds: 2),
+      animationDuration: const Duration(seconds: 2), nextScreen: SelectionScreen(),
     );
   }
 }
