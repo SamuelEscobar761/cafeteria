@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
               TextFormField(
                 keyboardType: TextInputType.number,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
                 decoration: InputDecoration(
                   labelText: 'Código',
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 16.0),
               TextFormField(
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
                 decoration: InputDecoration(
                   labelText: 'Correo Electrónico',
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
               TextFormField(
                 obscureText: true,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
                 decoration: InputDecoration(
                   labelText: 'Contraseña',
