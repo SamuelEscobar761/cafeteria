@@ -50,8 +50,10 @@ import 'package:flutter/material.dart';
                         salsasDisponibles = snapshotSalsas.data ?? [];
                         return Scaffold(
                           appBar: AppBar(
+                            backgroundColor: Color.fromARGB(255, 107, 142, 35),
                             title: Text(almuerzo.nombre),
                           ),
+                          backgroundColor: Colors.lightGreen.shade200,
                           body: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(

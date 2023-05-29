@@ -19,14 +19,23 @@ class MenuScreen extends StatelessWidget {
         if (snapshot.hasData) {
           List<Plato>? platos = snapshot.data;
           return Scaffold(
-            backgroundColor: AppColors.backgroundColor,
+            appBar: AppBar(
+              backgroundColor: Color.fromARGB(255, 107, 142, 35),
+              centerTitle: true,
+              title: Text(
+                '¿Que vas a comer hoy?',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              elevation: 0,
+            ),
+            backgroundColor: Colors.lightGreen.shade200,
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
-                    'Escoge tu almuerzo',
+                    'Nuestro menu de hoy',
                     style: TextStyle(
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
@@ -51,11 +60,12 @@ class MenuScreen extends StatelessWidget {
                         child: Container(
                           margin: margin,
                           decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(8.0),
                             border: Border.all(
                               color: Colors.grey,
                               width: 1.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: ListTile(
                             leading: Image.asset(plato.imagen),
@@ -79,5 +89,4 @@ class MenuScreen extends StatelessWidget {
       },
     );
   }
-
 }
