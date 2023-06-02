@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../models/Cliente.dart';
-import '../models/Plato.dart';
+import '../models/almuerzo.dart';
+import '../models/ensalada.dart';
+import '../models/guarnicion.dart';
+import '../models/salsa.dart';
 
 class ApiConnector {
-  static const String baseUrl = 'http://192.168.1.229/api-cafeteria'; // Reemplaza con la URL de tu servidor
+  static const String baseUrl = 'http://192.168.85.125/api-cafeteria'; // Reemplaza con la URL de tu servidor
 
   // Instancia única del singleton
   static final ApiConnector _instance = ApiConnector._internal();
@@ -96,55 +99,110 @@ class ApiConnector {
     }
   }
 
-  Future<List<Plato>> getPlatos()async {
-    //TODO
-    final List<Plato> almuerzos = [
-      Plato(
-        nombre: "Almuerzo 1",
-        descripcion: "Descripción del almuerzo 1",
-        precio: 10.99,
-        imagen: "assets/images/upb_logo.jpg",
-        acompanhamientos: 2,
-        ensaladas: 1,
-        salsas: 2,
-      ),
-      Plato(
-        nombre: "Almuerzo 2",
-        descripcion: "Descripción del almuerzo 2",
-        precio: 9.99,
-        imagen: "assets/images/upb_logo.jpg",
-        acompanhamientos: 1,
-        ensaladas: 2,
-        salsas: 2,
-      ),
-      // Agrega más objetos Almuerzo según tus necesidades
-    ];
+  Future<List<Almuerzo>> getAlmuerzos()async {
+    List<Almuerzo> almuerzos = [];
+    final url = Uri.parse('$baseUrl/almuerzos.php');
+    try{
+      final response = await http.post(url).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        // La solicitud fue exitosa, puedes manejar la respuesta aquí
+        print(response.body);
+        final List<dynamic> jsonResponse = jsonDecode(response.body);
+        for (var jsonData in jsonResponse) {
+          Almuerzo almuerzo = Almuerzo.fromJson(jsonData);
+          almuerzos.add(almuerzo);
+        }
+
+      } else {
+        // La solicitud no fue exitosa, maneja el error aquí
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+
+    }catch (e) {
+      // Ocurrió un error durante la conexión, maneja la excepción aquí
+      print('Error de conexión: $e');
+    }
     return almuerzos;
   }
-  Future<List<String>> getGuarniciones()async {
-    List<String> guarnicionesDisponibles = [
-      'Acompanhamiento 1',
-      'Acompanhamiento 2',
-      'Acompanhamiento 3',
-      'Acompanhamiento 4',
-    ];
+  Future<List<Guarnicion>> getGuarniciones(int almuerzoId)async {
+    List<Guarnicion> guarnicionesDisponibles = [];
+    final url = Uri.parse('$baseUrl/guarniciones.php');
+    final body = {
+      "id_almuerzo": almuerzoId.toString(),
+    };
+    try{
+      final response = await http.post(url, body: body).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        // La solicitud fue exitosa, puedes manejar la respuesta aquí
+        print(response.body);
+        final List<dynamic> jsonResponse = jsonDecode(response.body);
+        for (var jsonData in jsonResponse) {
+          Guarnicion guarnicion = Guarnicion.fromJson(jsonData);
+          guarnicionesDisponibles.add(guarnicion);
+        }
+      } else {
+        // La solicitud no fue exitosa, maneja el error aquí
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+
+    }catch (e) {
+      // Ocurrió un error durante la conexión, maneja la excepción aquí
+      print('Error de conexión: $e');
+    }
     return guarnicionesDisponibles;
   }
-  Future<List<String>> getEnsaladas()async {
-    List<String> ensaladasDisponibles = [
-      'Ensalada 1',
-      'Ensalada 2',
-      'Ensalada 3',
-      'Ensalada 4',
-    ];
+  Future<List<Ensalada>> getEnsaladas(int almuerzoId)async {
+    List<Ensalada> ensaladasDisponibles = [];
+    final url = Uri.parse('$baseUrl/ensaladas.php');
+    final body = {
+      "id_almuerzo": almuerzoId.toString(),
+    };
+    try{
+      final response = await http.post(url, body: body).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        // La solicitud fue exitosa, puedes manejar la respuesta aquí
+        print(response.body);
+        final List<dynamic> jsonResponse = jsonDecode(response.body);
+        for (var jsonData in jsonResponse) {
+          Ensalada ensalada = Ensalada.fromJson(jsonData);
+          ensaladasDisponibles.add(ensalada);
+        }
+      } else {
+        // La solicitud no fue exitosa, maneja el error aquí
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+
+    }catch (e) {
+      // Ocurrió un error durante la conexión, maneja la excepción aquí
+      print('Error de conexión: $e');
+    }
     return ensaladasDisponibles;
   }
-  Future<List<String>> getSalsas()async{
-    List<String> salsasDisponibles =[
-      'Ketchup',
-      'Mostaza',
-      'Mayonesa',
-    ];
+  Future<List<Salsa>> getSalsas(int almuerzoId)async{
+    List<Salsa> salsasDisponibles = [];
+    final url = Uri.parse('$baseUrl/salsas.php');
+    final body = {
+      "id_almuerzo": almuerzoId.toString(),
+    };
+    try{
+      final response = await http.post(url, body: body).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        // La solicitud fue exitosa, puedes manejar la respuesta aquí
+        print(response.body);
+        final List<dynamic> jsonResponse = jsonDecode(response.body);
+        for (var jsonData in jsonResponse) {
+          Salsa salsa = Salsa.fromJson(jsonData);
+          salsasDisponibles.add(salsa);
+        }
+      } else {
+        // La solicitud no fue exitosa, maneja el error aquí
+        print('Error en la solicitud: ${response.statusCode}');
+      }
+
+    }catch (e) {
+      // Ocurrió un error durante la conexión, maneja la excepción aquí
+      print('Error de conexión: $e');
+    }
     return salsasDisponibles;
   }
   Future<void> insertReserva()async {

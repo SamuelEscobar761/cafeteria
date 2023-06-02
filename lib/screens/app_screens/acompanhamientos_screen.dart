@@ -1,20 +1,23 @@
   import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
 
-  import '../../models/Plato.dart';
+  import '../../models/almuerzo.dart';
+import '../../models/ensalada.dart';
+import '../../models/guarnicion.dart';
+import '../../models/salsa.dart';
 
   class AcompanhamientosScreen extends StatefulWidget {
-    final Plato plato;
+    final Almuerzo almuerzo;
     final List<String?> acompanhamientosSeleccionados;
     final List<String?> ensaladasSeleccionadas;
     final List<String?> salsasSeleccionadas;
 
     AcompanhamientosScreen({
       Key? key,
-      required this.plato,
-    })   : acompanhamientosSeleccionados = List<String?>.filled(plato.acompanhamientos, null, growable: false),
-          ensaladasSeleccionadas = List<String?>.filled(plato.ensaladas, null, growable: false),
-          salsasSeleccionadas = List<String?>.filled(plato.salsas, null, growable: false),
+      required this.almuerzo,
+    })   : acompanhamientosSeleccionados = List<String?>.filled(almuerzo.guarniciones, null, growable: false),
+          ensaladasSeleccionadas = List<String?>.filled(almuerzo.ensaladas, null, growable: false),
+          salsasSeleccionadas = List<String?>.filled(almuerzo.salsas, null, growable: false),
           super(key: key);
 
     @override
@@ -22,32 +25,31 @@ import 'package:flutter/material.dart';
   }
 
   class _AcompanhamientosScreenState extends State<AcompanhamientosScreen> {
-
     @override
     Widget build(BuildContext context) {
       List<String?> guarnicionesDisponibles;
       List<String?> ensaladasDisponibles;
       List<String?> salsasDisponibles;
-      Plato almuerzo = widget.plato;
+      Almuerzo almuerzo = widget.almuerzo;
       List<String?> acompanhamientosSeleccionados = widget.acompanhamientosSeleccionados;
       List<String?> ensaladasSeleccionadas = widget.ensaladasSeleccionadas;
       List<String?> salsasSeleccionadas = widget.salsasSeleccionadas;
 
-      return FutureBuilder<List<String>>(
-        future: ApiConnector.instance.getGuarniciones(),
+      return FutureBuilder<List<Guarnicion>>(
+        future: ApiConnector.instance.getGuarniciones(almuerzo.id),
         builder: (context, snapshotGuarniciones) {
           if (snapshotGuarniciones.hasData) {
-            guarnicionesDisponibles = snapshotGuarniciones.data ?? [];
-            return FutureBuilder<List<String>>(
-              future: ApiConnector.instance.getEnsaladas(),
+            guarnicionesDisponibles = snapshotGuarniciones.data?.map((guarnicion) => guarnicion.nombre).toList() ?? [];
+            return FutureBuilder<List<Ensalada>>(
+              future: ApiConnector.instance.getEnsaladas(almuerzo.id),
               builder: (context, snapshotEnsaladas) {
                 if (snapshotEnsaladas.hasData) {
-                  ensaladasDisponibles = snapshotEnsaladas.data ?? [];
-                  return FutureBuilder<List<String>>(
-                    future: ApiConnector.instance.getSalsas(),
+                  ensaladasDisponibles = snapshotEnsaladas.data?.map((ensalada) => ensalada.nombre).toList() ?? [];
+                  return FutureBuilder<List<Salsa>>(
+                    future: ApiConnector.instance.getSalsas(almuerzo.id),
                     builder: (context, snapshotSalsas) {
                       if (snapshotSalsas.hasData) {
-                        salsasDisponibles = snapshotSalsas.data ?? [];
+                        salsasDisponibles = snapshotSalsas.data?.map((salsa) => salsa.nombre).toList() ?? [];
                         return Scaffold(
                           appBar: AppBar(
                             backgroundColor: Color.fromARGB(255, 107, 142, 35),
@@ -59,7 +61,7 @@ import 'package:flutter/material.dart';
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                for (int i = 0; i < almuerzo.acompanhamientos; i++)
+                                for (int i = 0; i < almuerzo.guarniciones; i++)
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -150,6 +152,11 @@ import 'package:flutter/material.dart';
                             onPressed: () {
                               // Acción a realizar al presionar el botón de finalizar
                               // Puedes utilizar las variables acompanhamientoSeleccionado, ensaladaSeleccionada y salsasSeleccionadas
+                              Navigator.pushNamed(
+                                context,
+                                '/qr',
+                                arguments: almuerzo, // Pasas el objeto cliente como argumento
+                              );
                             },
                             child: Icon(Icons.check),
                           ),
