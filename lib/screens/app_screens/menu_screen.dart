@@ -22,9 +22,20 @@ class MenuScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 107, 142, 35),
               centerTitle: true,
-              title: Text(
-                '¿Que vas a comer hoy?',
-                style: TextStyle(fontSize: 20.0),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.restaurant, size: 24, color: Colors.white),
+                  SizedBox(width: 8),
+                  Text(
+                    '¿Qué vas a comer hoy?',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
               ),
               elevation: 0,
             ),
@@ -60,18 +71,52 @@ class MenuScreen extends StatelessWidget {
                         child: Container(
                           margin: margin,
                           decoration: BoxDecoration(
-                            color: Colors.transparent,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(8.0),
                             border: Border.all(
                               color: Colors.grey,
                               width: 1.0,
                             ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: Offset(0, 2), // changes position of shadow
+                              ),
+                            ],
                           ),
                           child: ListTile(
-                            leading: Image.asset(plato.imagen),
-                            title: Text(plato.nombre),
-                            subtitle: Text(plato.descripcion),
-                            trailing: Text("Bs. ${plato.precio.toStringAsFixed(2)}"),
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.asset(
+                                plato.imagen,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text(
+                              plato.nombre,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            subtitle: Text(
+                              plato.descripcion,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            trailing: Text(
+                              "Bs. ${plato.precio.toStringAsFixed(2)}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
                       );
