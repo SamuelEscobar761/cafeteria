@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-  import '../../models/almuerzo.dart';
+import '../../models/almuerzo.dart';
 import '../../models/ensalada.dart';
 import '../../models/guarnicion.dart';
 import '../../models/salsa.dart';
+import '../../services/api_connector.dart';
 
   class AcompanhamientosScreen extends StatefulWidget {
     final Almuerzo almuerzo;
@@ -49,6 +49,7 @@ import '../../models/salsa.dart';
                     builder: (context, snapshotSalsas) {
                       if (snapshotSalsas.hasData) {
                         salsasDisponibles = snapshotSalsas.data?.map((salsa) => salsa.nombre).toList() ?? [];
+                        var isParaLlevar;
                         return Scaffold(
                           appBar: AppBar(
                             backgroundColor: Color.fromARGB(255, 107, 142, 35),
