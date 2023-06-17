@@ -49,7 +49,7 @@ import '../../services/api_connector.dart';
                     builder: (context, snapshotSalsas) {
                       if (snapshotSalsas.hasData) {
                         salsasDisponibles = snapshotSalsas.data?.map((salsa) => salsa.nombre).toList() ?? [];
-                        var isParaLlevar;
+                        var isParaLlevar = false;
                         return Scaffold(
                           appBar: AppBar(
                             backgroundColor: Color.fromARGB(255, 107, 142, 35),

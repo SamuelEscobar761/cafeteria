@@ -9,7 +9,7 @@ import '../models/guarnicion.dart';
 import '../models/salsa.dart';
 
 class ApiConnector {
-  static const String baseUrl = 'http://172.31.208.1/api-cafeteria'; // Reemplaza con la URL de tu servidor
+  static const String baseUrl = 'http://192.168.81.112/api-cafeteria'; // Reemplaza con la URL de tu servidor
 
   // Instancia única del singleton
   static final ApiConnector _instance = ApiConnector._internal();
