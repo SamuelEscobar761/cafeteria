@@ -90,3 +90,4 @@ class QRScreen extends StatelessWidget {
     );
   }
 }
+
