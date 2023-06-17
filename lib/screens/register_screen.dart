@@ -34,7 +34,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 107, 142, 35),
+        centerTitle: true,
+        title: Text(
+          'Bienvenido a Lalas Coffee',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        elevation: 0,
+      ),
+      backgroundColor: Colors.lightGreen.shade200,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

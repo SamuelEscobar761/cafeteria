@@ -1,10 +1,9 @@
-  import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
-
-  import '../../models/almuerzo.dart';
+import '../../models/almuerzo.dart';
 import '../../models/ensalada.dart';
 import '../../models/guarnicion.dart';
 import '../../models/salsa.dart';
+import '../../services/api_connector.dart';
 
   class AcompanhamientosScreen extends StatefulWidget {
     final Almuerzo almuerzo;
@@ -50,10 +49,17 @@ import '../../models/salsa.dart';
                     builder: (context, snapshotSalsas) {
                       if (snapshotSalsas.hasData) {
                         salsasDisponibles = snapshotSalsas.data?.map((salsa) => salsa.nombre).toList() ?? [];
+                        var isParaLlevar = false;
                         return Scaffold(
                           appBar: AppBar(
                             backgroundColor: Color.fromARGB(255, 107, 142, 35),
-                            title: Text(almuerzo.nombre),
+                            title: Text(
+                              almuerzo.nombre,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                           backgroundColor: Colors.lightGreen.shade200,
                           body: Padding(
@@ -61,6 +67,14 @@ import '../../models/salsa.dart';
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  'Acompañamientos:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
                                 for (int i = 0; i < almuerzo.guarniciones; i++)
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,6 +103,14 @@ import '../../models/salsa.dart';
                                       SizedBox(height: 16.0),
                                     ],
                                   ),
+                                Text(
+                                  'Ensaladas:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
                                 for (int i = 0; i < almuerzo.ensaladas; i++)
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,6 +139,14 @@ import '../../models/salsa.dart';
                                       SizedBox(height: 16.0),
                                     ],
                                   ),
+                                Text(
+                                  'Salsas:',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
                                 for (int i = 0; i < almuerzo.salsas; i++)
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,6 +175,22 @@ import '../../models/salsa.dart';
                                       SizedBox(height: 16.0),
                                     ],
                                   ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: isParaLlevar,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          isParaLlevar = newValue ?? false;
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      'Para llevar',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

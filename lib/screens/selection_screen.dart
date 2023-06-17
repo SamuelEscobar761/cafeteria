@@ -7,7 +7,7 @@ class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: Colors.lightGreen.shade200,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
