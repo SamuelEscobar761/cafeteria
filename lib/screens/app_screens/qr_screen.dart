@@ -5,8 +5,9 @@ import 'package:gallery_saver/gallery_saver.dart';
 class QRScreen extends StatelessWidget {
   final String imageUrl = "https://static.vecteezy.com/system/resources/previews/002/557/391/original/qr-code-for-scanning-free-vector.jpg";
 
-  void _downloadImage(String imageUrl) async {
-    GallerySaver.saveImage(imageUrl);
+  Future<bool?> _downloadImage(String imageUrl) async {
+    bool? success = await GallerySaver.saveImage(imageUrl);
+    return success;
   }
 
 
@@ -27,10 +28,47 @@ class QRScreen extends StatelessWidget {
               height: 200, // Alto deseado de la imagen
             ),
             SizedBox(height: 16.0),
-            ElevatedButton (
-              onPressed: () {
-                // Lógica para descargar la imagen
-                _downloadImage(imageUrl);
+            ElevatedButton(
+              onPressed: () async {
+                bool? downloadSuccess = await _downloadImage(imageUrl);
+                if (downloadSuccess != null && downloadSuccess) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Descarga exitosa'),
+                        content: Text('La imagen se descargó correctamente.'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  // Mostrar un mensaje de error si la descarga no fue exitosa
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Error'),
+                        content: Text('No se pudo descargar la imagen.'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
               child: Text('Descargar imagen'),
             ),
