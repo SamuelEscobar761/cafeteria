@@ -1,3 +1,4 @@
+import 'package:cafeteria/models/Cliente.dart';
 import 'package:flutter/material.dart';
 import '../../models/almuerzo.dart';
 import '../../models/ensalada.dart';
@@ -7,6 +8,7 @@ import '../../services/api_connector.dart';
 
   class AcompanhamientosScreen extends StatefulWidget {
     final Almuerzo almuerzo;
+    final String id_cliente;
     final List<String?> acompanhamientosSeleccionados;
     final List<String?> ensaladasSeleccionadas;
     final List<String?> salsasSeleccionadas;
@@ -14,6 +16,7 @@ import '../../services/api_connector.dart';
     AcompanhamientosScreen({
       Key? key,
       required this.almuerzo,
+      required this.id_cliente,
     })   : acompanhamientosSeleccionados = List<String?>.filled(almuerzo.guarniciones, null, growable: false),
           ensaladasSeleccionadas = List<String?>.filled(almuerzo.ensaladas, null, growable: false),
           salsasSeleccionadas = List<String?>.filled(almuerzo.salsas, null, growable: false),
@@ -30,6 +33,7 @@ import '../../services/api_connector.dart';
       List<String?> ensaladasDisponibles;
       List<String?> salsasDisponibles;
       Almuerzo almuerzo = widget.almuerzo;
+      String id_cliente = widget.id_cliente;
       List<String?> acompanhamientosSeleccionados = widget.acompanhamientosSeleccionados;
       List<String?> ensaladasSeleccionadas = widget.ensaladasSeleccionadas;
       List<String?> salsasSeleccionadas = widget.salsasSeleccionadas;
@@ -201,7 +205,14 @@ import '../../services/api_connector.dart';
                               Navigator.pushNamed(
                                 context,
                                 '/qr',
-                                arguments: almuerzo, // Pasas el objeto cliente como argumento
+                                  arguments: {
+                                    'almuerzo': almuerzo,
+                                    'id_cliente': id_cliente,
+                                    'guarniciones': acompanhamientosSeleccionados,
+                                    'ensaladas': ensaladasSeleccionadas,
+                                    'salsas': salsasSeleccionadas,
+
+                                  },// Pasas el objeto cliente como argumento
                               );
                             },
                             child: Icon(Icons.check),
