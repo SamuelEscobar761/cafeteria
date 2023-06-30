@@ -1,9 +1,12 @@
+import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
+import '../../models/almuerzo.dart';
+
 
 class QRScreen extends StatelessWidget {
-  final String imageUrl = "https://static.vecteezy.com/system/resources/previews/002/557/391/original/qr-code-for-scanning-free-vector.jpg";
+  String imageUrl = "192.168.1.249/upload_qr/";
 
   Future<bool?> _downloadImage(String imageUrl) async {
     bool? success = await GallerySaver.saveImage(imageUrl);
@@ -14,6 +17,13 @@ class QRScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final Almuerzo almuerzo = arguments['almuerzo'] as Almuerzo;
+    final String idCliente = arguments['id_cliente'] as String;
+    final List<String?> guarniciones = arguments['guarniciones'] as List<String?>;
+    final List<String?> ensaladas = arguments['ensaladas'] as List<String?>;
+    final List<String?> salsas = arguments['salsas'] as List<String?>;
+    imageUrl = "192.168.1.249/upload_qr/" + almuerzo.precio.toString();
     return Scaffold(
       appBar: AppBar(
         title: Text('Página de QR'),
@@ -81,6 +91,9 @@ class QRScreen extends StatelessWidget {
             ElevatedButton (
               onPressed: () {
                 // Lógica para finalizar la reserva
+                ApiConnector.instance.insertReserva(idCliente, almuerzo!.id, guarniciones, ensaladas, salsas);
+                print(idCliente);
+                print(almuerzo.id);
               },
               child: Text('Finalizar reserva'),
             ),

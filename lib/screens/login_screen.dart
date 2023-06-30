@@ -1,6 +1,5 @@
 import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController codigoController = TextEditingController();
@@ -109,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/menu',
-                        arguments: cliente, // Pasas el objeto cliente como argumento
+                        arguments: codigo, // Pasas el objeto cliente como argumento
                       );
                     } else {
                       // El cliente no se encontró o hubo un error, puedes mostrar un mensaje de error o realizar alguna acción adicional

@@ -1,9 +1,6 @@
 import 'package:cafeteria/services/api_connector.dart';
 import 'package:flutter/material.dart';
-
 import '../../models/almuerzo.dart';
-import '../../models/Cliente.dart';
-import '../constants.dart';
 import 'acompanhamientos_screen.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -11,13 +8,15 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Recibiendo el argumento del objeto cliente
-    final cliente = ModalRoute.of(context)?.settings.arguments as Cliente?;
+    final idCliente = ModalRoute.of(context)?.settings.arguments as String;
 
     return FutureBuilder<List<Almuerzo>>(
       future: ApiConnector.instance.getAlmuerzos(),
       builder: (context, snapshot) {
+
         if (snapshot.hasData) {
           List<Almuerzo>? platos = snapshot.data;
+          print("192.168.1.249/uploads_images/" + platos![0].nombre.toString() + ".jpg");
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 107, 142, 35),
@@ -64,7 +63,7 @@ class MenuScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AcompanhamientosScreen(almuerzo: plato),
+                              builder: (context) => AcompanhamientosScreen(almuerzo: plato, id_cliente: idCliente),
                             ),
                           );
                         },
@@ -87,15 +86,22 @@ class MenuScreen extends StatelessWidget {
                             ],
                           ),
                           child: ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset(
-                                plato.imagen,
-                                width: 60,
-                                height: 60,
-                                fit: BoxFit.cover,
-                              ),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.grey, // Color gris para el círculo
+                              radius: 30,
+                              child: plato.imagen != "NULL"
+                                  ? ClipRRect(
+                                borderRadius: BorderRadius.circular(25.0),
+                                child: Image.asset(
+                                  "192.168.1.249/uploads_images/" + plato.nombre.toString() + ".jpg",
+                                  width: 60,
+                                  height: 60,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                                  : SizedBox(width: 60, height: 60),
                             ),
+
                             title: Text(
                               plato.nombre,
                               style: TextStyle(
